@@ -25,7 +25,6 @@ class LoginPage extends React.Component {
     //the pop up will accept a promise
     //go into authentication on firebase, and enable the provider you plan on using
     firebase
-
       .auth()
       .signInWithPopup(provider)
       .then(user => {

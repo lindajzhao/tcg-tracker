@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "./NavBar";
-import { BrowserRouter, Route, Link, Redirect, Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import SingleCard from "./SingleCard";
 
 class MyDeck extends React.Component {

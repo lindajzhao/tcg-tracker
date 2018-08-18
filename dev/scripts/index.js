@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from "react-dom";
 import Router from "./components/Router.js"
-import FIREBASE_CONFIG from "./config.js"
+import { FIREBASE_CONFIG } from "./config.js"
 
 //Initialize Firebase
 firebase.initializeApp(FIREBASE_CONFIG);

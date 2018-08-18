@@ -63,6 +63,7 @@ class CardDetailPage extends React.Component {
    }
 
    getCardInfo() {
+         console.log('getCardInfo `${API_URLS.POKEMON_API_URL}/cards/${this.state.cardId}`', `${API_URLS.POKEMON_API_URL}/cards/${this.state.cardId}`)
       axios
         .get(`${API_URLS.POKEMON_API_URL}/cards/${this.state.cardId}`)
         .then(res => {
@@ -134,8 +135,10 @@ class CardDetailPage extends React.Component {
          }
       })
    }
-
-    render() {     
+      
+   render() {     
+      // TODO: BUG: Cannot access this page from "My Deck" route
+      console.log('PROPS __', this.props)
         const { ability, attacks, hp, name, types, weaknesses, imageUrl, rarity, supertype, text, nationalPokedexNumber } = this.props.location.state.card;
         return <React.Fragment>
             <NavBar logInUser={this.logInUser} googleSignIn={this.googleSignIn} signOutUser={this.signOutUser} />
