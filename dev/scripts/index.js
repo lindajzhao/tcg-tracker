@@ -1,19 +1,10 @@
 import React from 'react';
 import { render } from "react-dom";
 import Router from "./components/Router.js"
-// import NavBar from "./components/NavBar.js"
+import FIREBASE_CONFIG from "./config.js"
 
 //Initialize Firebase
-var config = {
-    apiKey: "AIzaSyBBYLdmlmT9lKiupqDCj54i4rSnGyZxAlM",
-    authDomain: "tcg-tracker.firebaseapp.com",
-    databaseURL: "https://tcg-tracker.firebaseio.com",
-    projectId: "tcg-tracker",
-    storageBucket: "",
-    messagingSenderId: "401497468582"
-};
-firebase.initializeApp(config);
-
+firebase.initializeApp(FIREBASE_CONFIG);
 
 class Index extends React.Component {
     constructor() {
@@ -55,7 +46,7 @@ class Index extends React.Component {
 
         firebase.auth().signInWithPopup(provider)
             .then((user) => {
-                console.log('user has logged in')
+                console.log('user has logged in', user)
             }), (error) => {
                 alert(error);
             }

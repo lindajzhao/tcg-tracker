@@ -13,7 +13,6 @@ class LoginPage extends React.Component {
   }
 
   signIn() {
-    // console.log("sign In");
     //new instance of a google auth provider
     const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -34,7 +33,6 @@ class LoginPage extends React.Component {
       });
   }
   signOut() {
-    // console.log("sign out");
     firebase.auth().signOut();
 
     //you can set the state to false explicitly, but componentDidMount watches for the changes in user thus, updating it
@@ -43,7 +41,6 @@ class LoginPage extends React.Component {
   componentDidMount(props) {
     //this will check for a user object which we will call res
     firebase.auth().onAuthStateChanged(res => {
-      // console.log(res);
       this.props.loggedInCheck(res);
     });
   }

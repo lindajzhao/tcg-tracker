@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Route, Link, Redirect, Switch } from 'react-router-dom';
-import credentials from '../credentials';
+import { Link } from 'react-router-dom';
+import { API_URLS } from '../config';
 import axios from 'axios';
 import NavBar from "./NavBar.js"
 import SingleCard from "./SingleCard";
@@ -42,7 +42,7 @@ class CardGridPage extends React.Component {
 
         // make axio calls to retrive all cards in set
         // want to retrieve first 20 cards??
-        axios.get(`${credentials.pokemonApiUrl}/cards`,  {
+        axios.get(`${API_URLS.POKEMON_API_URL}/cards`,  {
             params: {
                 setCode: set,
                 page: page,
@@ -51,10 +51,6 @@ class CardGridPage extends React.Component {
         }).then((res) => {
             const allCards = this.state.allCardsInSet.concat(res.data.cards);
 
-            // console.log(this.state.allCardsInSet);
-            // console.log(res.data.cards);
-            // console.log(allCards);
-            console.log(res.data.cards.length);
             this.setState({
                 allCardsInSet: allCards,
                 loadedCards: true,
@@ -72,7 +68,6 @@ class CardGridPage extends React.Component {
         this.clearFilters(e);
         // filterType is the value of checkbox that's selected
         const filterType = e.target.value;
-        // console.log(filterType)
         // if this is the first checkbox selected, filter from allCardsInSet. if there are multiple checkboxes selected then filter the filteredCards. 
         this.setState({ 
             showFilteredCards: true
@@ -82,21 +77,16 @@ class CardGridPage extends React.Component {
         const filteredCards = this.state.allCardsInSet.filter(card => {
             // if the card is missing "types" data then skip it
             if(card.types) {
-                // console.log(card.types[0].toLowerCase());
-                // console.log(filterType);
-                // console.log(card.types[0].toLowerCase() === filterType);
                 card.types.includes(filterType);
                 return card.types[0].toLowerCase() === filterType;
             }
         });
 
         // set filtered cards into state.
-        console.log(filteredCards);
         this.setState({ filteredCards });
     }
 
     clearFilters() {
-        // e.preventDefault();
         this.setState({ 
             filteredCards : [],
             showFilteredCards: false,
@@ -104,7 +94,6 @@ class CardGridPage extends React.Component {
     }
 
     searchBySet(e) {
-        // this.typeFilter.checked === false;
         this.setState({ 
             allCardsInSet : [],
             showFilteredCards : false,
@@ -117,7 +106,6 @@ class CardGridPage extends React.Component {
 
     render() {
         // JavaScript Lives here!!
-        // console.log(this.state.allCardsInSet);
         // make the dataset (current state) into a variable 
         // if cards are filtered, display the filteredCards. if no filters, display full list
         let cardSet;
@@ -127,8 +115,6 @@ class CardGridPage extends React.Component {
             cardSet = this.state.allCardsInSet
         }
 
-        // console.log(this)
-        // console.log(cardSet);
         return (
             <React.Fragment>
                 <NavBar logInUser={this.logInUser} googleSignIn={this.googleSignIn} signOutUser={this.signOutUser} />
@@ -148,8 +134,6 @@ class CardGridPage extends React.Component {
                                     <option value="xy1">XY</option>
                                     <option value="sm1">Sun and Moon</option>
                                     <option value="bw1">Black and White</option>
-                                    {/* <option value=“barbecue”>barbecue</option>
-                                    <option value=“indian”>indian</option> */}
                                 </select>
                             </div>
     
@@ -201,8 +185,6 @@ class CardGridPage extends React.Component {
                                     <input type="button" className="clear" onClick={this.clearFilters} value="Clear Filter"/>
                                  </div>
                             </div>
-                            {/* <label htmlFor="set">Set</label>
-                            <input type="" /> */}
                         </form>
                         <div className="displayCards">
                             {
@@ -226,6 +208,6 @@ class CardGridPage extends React.Component {
             </React.Fragment>
         )
     }
-}
+};
 
 export default CardGridPage;

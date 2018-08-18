@@ -30,7 +30,6 @@ class MyDeck extends React.Component {
    }
 
    getCardDeck() {
-      console.log("get card deck")
       const dbRefUser = firebase.database().ref(`users/${firebase.auth().currentUser.uid}`);
       dbRefUser.on('value', (snapshot) => {
          const cardArray = [];
@@ -49,7 +48,6 @@ class MyDeck extends React.Component {
 
    render() {
       const { cardSet } = this.state;
-      console.log(cardSet);
       return (
          <React.Fragment>
             <NavBar
